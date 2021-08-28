@@ -8,7 +8,7 @@ body {
     //place-items: center;
 }
 
-.estudasd {
+.bankbox {
     //background-color: rgb(1, 81, 146);
     background: linear-gradient(to bottom, rgb(1, 81, 146), rgb(1, 42, 77));
     border: 5px solid black;
@@ -39,20 +39,20 @@ body {
             font-size: 45px;
             font-family:monospace;
     
-            -moz-user-select: -moz-none;
-            -khtml-user-select: none;
-            -webkit-user-select: none;
-         
+            // So the user can't select text
+            user-select: none;
             /*
               Introduced in IE 10.
               See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
             */
-            -ms-user-select: none;
-            user-select: none;
-            
-    
+
+            display: inline-block;
+            transition: 0.5s all ease;
             &:hover {
-                cursor: pointer;
+                transform: rotate(-1.5deg) scale(1.03, 1.03);
+                cursor: pointer;   
+                color: #fff;
+                text-shadow: 2px 2px 5px #000000;                        
             }
         }
 
@@ -67,22 +67,14 @@ body {
             font-size: 25px;
             font-family:monospace;
     
-            -moz-user-select: -moz-none;
-            -khtml-user-select: none;
-            -webkit-user-select: none;
-         
-            /*
-              Introduced in IE 10.
-              See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-            */
-            -ms-user-select: none;
             user-select: none;
     
+            transition: 0.5s all ease;
             &:hover {
-                cursor: pointer;
-                
-                //color:white;
-                //transition: 0.3s;
+                transform: rotate(-1.5deg) scale(1.03, 1.03);
+                cursor: pointer;   
+                color: #fff;
+                text-shadow: 1px 1px 5px #000000;                        
             }
         }
     }

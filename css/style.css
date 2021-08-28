@@ -4,7 +4,7 @@ body {
   background-color: #031e36;
 }
 
-.estudasd {
+.bankbox {
   background: -webkit-gradient(linear, left top, left bottom, from(#015192), to(#012a4d));
   background: linear-gradient(to bottom, #015192, #012a4d);
   border: 5px solid black;
@@ -20,51 +20,60 @@ body {
   text-align: center;
 }
 
-.estudasd .clicks {
+.bankbox .clicks {
   margin-top: 10px;
 }
 
-.estudasd .clicks span {
+.bankbox .clicks span {
   color: #f3f3f3;
   font-weight: bold;
   font-size: 45px;
   font-family: monospace;
-  -moz-user-select: -moz-none;
   -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   /*
               Introduced in IE 10.
               See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
             */
-  -ms-user-select: none;
-  user-select: none;
+  display: inline-block;
+  -webkit-transition: 0.5s all ease;
+  transition: 0.5s all ease;
 }
 
-.estudasd .clicks span:hover {
+.bankbox .clicks span:hover {
+  -webkit-transform: rotate(-1.5deg) scale(1.03, 1.03);
+          transform: rotate(-1.5deg) scale(1.03, 1.03);
   cursor: pointer;
+  color: #fff;
+  text-shadow: 2px 2px 5px #000000;
 }
 
-.estudasd .hoy span {
+.bankbox .hoy span {
   padding-top: 5px;
   display: none;
   color: #f3f3f3;
   font-weight: bold;
   font-size: 25px;
   font-family: monospace;
-  -moz-user-select: -moz-none;
   -webkit-user-select: none;
-  /*
-              Introduced in IE 10.
-              See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-            */
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: 0.5s all ease;
+  transition: 0.5s all ease;
 }
 
-.estudasd .hoy span:hover {
+.bankbox .hoy span:hover {
+  -webkit-transform: rotate(-1.5deg) scale(1.03, 1.03);
+          transform: rotate(-1.5deg) scale(1.03, 1.03);
   cursor: pointer;
+  color: #fff;
+  text-shadow: 1px 1px 5px #000000;
 }
 
-.estudasd button {
+.bankbox button {
   position: absolute;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -82,7 +91,7 @@ body {
   cursor: pointer;
 }
 
-.estudasd button:hover {
+.bankbox button:hover {
   color: white;
   background-color: #09410c;
   -webkit-transition: 0.3s;

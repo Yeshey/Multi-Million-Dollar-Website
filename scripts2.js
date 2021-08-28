@@ -133,16 +133,16 @@ function updatevisable(){
     CPSPSspan.innerHTML=CPSPS.toFixed(1) + ' $/s/s';
     CPS3span.innerHTML=CPS3.toFixed(1) + ' $/s^3';
     if (clicks>=10 && clicks<150){
-        CPSspan.setAttribute('style', 'display:initial;');
+        CPSspan.setAttribute('style', 'display:inline-block;');
     }
     if (clicks>=150 && clicks<1000){
-        CPSspan.setAttribute('style', 'display:initial;');
-        CPSPSspan.setAttribute('style', 'display:initial;');
+        CPSspan.setAttribute('style', 'display:inline-block;');
+        CPSPSspan.setAttribute('style', 'display:inline-block;');
     }
     if (clicks>=1000){
-        CPSspan.setAttribute('style', 'display:initial;');
-        CPSPSspan.setAttribute('style', 'display:initial;');
-        CPS3span.setAttribute('style', 'display:initial;');
+        CPSspan.setAttribute('style', 'display:inline-block;');
+        CPSPSspan.setAttribute('style', 'display:inline-block;');
+        CPS3span.setAttribute('style', 'display:inline-block;');
     }
 }
 
