@@ -39,13 +39,16 @@ var clicks=0,CPS=0, CPSPS=0, CPS3=0;
 var clickscookie = parseInt(getCookie('clicks'));
 var CPScookie = parseInt(getCookie('CPS'));
 var CPSPScookie = parseInt(getCookie('CPSPS'));
+var CPS3cookie = parseInt(getCookie('CPS3'));
+
 if (clickscookie) {
     clicks=clickscookie; }
 if (CPScookie) {
     CPS=CPScookie; }
 if (CPSPScookie) {
     CPSPS=CPSPScookie; }
-
+if (CPS3cookie) {
+    CPS3=CPS3cookie; }
 
 let clickspan = document.querySelector(".clicksspan");
 let CPSspan = document.querySelector(".CPSspan");
@@ -126,6 +129,8 @@ window.setInterval(function update() {
         CPSPSspan.innerHTML=value.toFixed(1) + ' $/s/s';
         setCookie('CPSPS',CPSPS,60);
     });
+
+    setCookie('CPS3',CPS3,60);
 
     updatevisable()
 
