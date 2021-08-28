@@ -26,13 +26,6 @@ function eraseCookie(name) {
 
 //eraseCookie('clicks');
 
-//https://www.w3schools.com/js/js_cookies.asp
-//better: https://stackoverflow.com/questions/14573223/set-cookie-and-get-cookie-with-javascript
-//document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
-document.cookie = clicks;
-var clicks = document.cookie;
-console.log(clicks);
-
 var clicks=0,CPS=0, CPSPS=0, CPS3=0;
 
 // Cookies testing
@@ -40,15 +33,21 @@ var clickscookie = parseInt(getCookie('clicks'));
 var CPScookie = parseInt(getCookie('CPS'));
 var CPSPScookie = parseInt(getCookie('CPSPS'));
 var CPS3cookie = parseInt(getCookie('CPS3'));
+var timecookie = parseInt(getCookie('time'));
 
-if (clickscookie) {
-    clicks=clickscookie; }
-if (CPScookie) {
-    CPS=CPScookie; }
-if (CPSPScookie) {
-    CPSPS=CPSPScookie; }
+
+timeabsent = (new Date).getTime() - timecookie
+console.log("timeabsent: " + timeabsent + "ms");
 if (CPS3cookie) {
-    CPS3=CPS3cookie; }
+    CPS3=CPS3cookie; console.log("CPS3: " + CPS3);}
+if (CPSPScookie) {
+    CPSPS=CPSPScookie + CPS3*(timeabsent/1000); console.log("CPSPS: " + CPSPS);}
+if (CPScookie) {
+    CPS=CPScookie + CPSPS*(timeabsent/1000); console.log("CPS: " + CPS);}
+if (clickscookie) {
+    clicks=clickscookie + CPS*(timeabsent/1000); console.log("clicks: " + clicks);}
+
+
 
 let clickspan = document.querySelector(".clicksspan");
 let CPSspan = document.querySelector(".CPSspan");
@@ -58,22 +57,12 @@ let CPS3span = document.querySelector(".CPS3span");
 clickspan.addEventListener('click', function(){
     //alert("hello");
     clicks++;
-
-    //clickspan.setAttribute('style','color:white');
-    
-    //setTimeout(500);
-
-    //clickspan.setAttribute('style','color:black transition: 0.3s; delay:0.5s');
-    //licks = Math.round((new Date()-Date.now()));
-    //document.querySelector(".clicks2").textContent=(clicks + " Clicks");
     updatevisable();
 })
 CPSspan.addEventListener('click', function(){
-    //alert("hello");
     CPS++;
-    //document.querySelector(".clicks2").textContent=(clicks + " Clicks");
     CPSspan.innerHTML=CPS.toFixed(1) + ' $/sec';
-    update();
+
 })
 CPSPSspan.addEventListener('click', function(){
     CPSPS++;
@@ -83,6 +72,38 @@ CPS3span.addEventListener('click', function(){
     CPS3++;
     CPS3span.innerHTML=CPS3.toFixed(1) + ' $/s^3';
 })
+
+window.setInterval(function update() {
+    // Passes here every 100ms.
+    // Every 100ms updates the speed at witch the numbers grow
+
+    CPSPS+=CPS3/10;
+    CPS+=CPSPS/10;
+    clicks+=CPS/10;
+
+    timedCounter((clicks+(CPS/10)), 100, clicks, function(value){
+        clickspan.innerHTML=value.toFixed(1) + ' $';
+        setCookie('clicks',clicks,60);
+    });
+
+    timedCounter((CPS+(CPSPS/10)), 100, CPS, function(value){
+        CPSspan.innerHTML=value.toFixed(1) + ' $/sec';
+        setCookie('CPS',CPS,60);
+    });
+
+    timedCounter((CPSPS+(CPS3/10)), 100, CPSPS, function(value){
+        CPSPSspan.innerHTML=value.toFixed(1) + ' $/s/s';
+        setCookie('CPSPS',CPSPS,60);
+    });
+
+    setCookie('CPS3',CPS3,60);
+
+    updatevisable()
+
+    // monitor when the user leaves the site
+    setCookie('time',(new Date).getTime(),60);
+
+}, 100);
 
 //https://stackoverflow.com/questions/18368095/how-to-grow-number-smoothly-from-0-to-5-000-000/18391316
 function timedCounter(finalValue, milliseconds, startValue, callback){
@@ -106,53 +127,19 @@ function timedCounter(finalValue, milliseconds, startValue, callback){
   
   }
 
-window.setInterval(function update() {
-    //document.querySelector('.estuda').textContent=Date.now();
-    //clicks++
-    //CPS3=CPS3+CPS3;
-    CPSPS+=CPS3/10;
-    CPS+=CPSPS/10;
-    clicks+=CPS/10;
-    //updatevisable();
-
-    timedCounter((clicks+(CPS/10)), 100, clicks, function(value){
-        clickspan.innerHTML=value.toFixed(1) + ' $';
-        setCookie('clicks',clicks,60);
-    });
-
-    timedCounter((CPS+(CPSPS/10)), 100, CPS, function(value){
-        CPSspan.innerHTML=value.toFixed(1) + ' $/sec';
-        setCookie('CPS',CPS,60);
-    });
-
-    timedCounter((CPSPS+(CPS3/10)), 100, CPSPS, function(value){
-        CPSPSspan.innerHTML=value.toFixed(1) + ' $/s/s';
-        setCookie('CPSPS',CPSPS,60);
-    });
-
-    setCookie('CPS3',CPS3,60);
-
-    updatevisable()
-
-}, 100);
-
 function updatevisable(){
     clickspan.innerHTML=clicks.toFixed(1) + ' $';
     CPSspan.innerHTML=CPS.toFixed(1) + ' $/sec';
     CPSPSspan.innerHTML=CPSPS.toFixed(1) + ' $/s/s';
     CPS3span.innerHTML=CPS3.toFixed(1) + ' $/s^3';
-    //Math.round(number * 10)
     if (clicks>=10 && clicks<150){
-        //alert("tada");
         CPSspan.setAttribute('style', 'display:initial;');
     }
     if (clicks>=150 && clicks<1000){
-        //alert("tada");
         CPSspan.setAttribute('style', 'display:initial;');
         CPSPSspan.setAttribute('style', 'display:initial;');
     }
     if (clicks>=1000){
-        //alert("tada");
         CPSspan.setAttribute('style', 'display:initial;');
         CPSPSspan.setAttribute('style', 'display:initial;');
         CPS3span.setAttribute('style', 'display:initial;');
