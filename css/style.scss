@@ -30,6 +30,20 @@ body {
 
     .clicks{
         margin-top: 10px;
+        .firsthover_r{
+            &:hover {
+                transition: 0.05s all ease;
+                color: red;
+                font-size: 50px;
+            }
+        }
+        .firsthover_b{
+            &:hover {
+                transition: 0.05s all ease;
+                color: rgb(177, 250, 255);
+                font-size: 50px;
+            }
+        }
         span{
             //padding-top:5px;
             
@@ -58,6 +72,20 @@ body {
 
     }
     .hoy{
+        .firsthover_s_r{
+            &:hover {
+                transition: 0.05s all ease;
+                color: red;
+                font-size: 30px;
+            }
+        }
+        .firsthover_s_b{
+            &:hover {
+                transition: 0.05s all ease;
+                color: rgb(177, 250, 255);
+                font-size: 30px;
+            }
+        }
         span{
             padding-top:5px;
             display:none;
