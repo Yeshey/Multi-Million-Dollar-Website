@@ -152,15 +152,20 @@ function updatevisable(){
     CPS3span.innerHTML=CPS3.toFixed(1) + ' $/s^3';
     if (clicks>=10 && clicks<150){
         CPSspan.setAttribute('style', 'display:inline-block;');
+        CPSspan.classList.add("anim");
     }
     if (clicks>=150 && clicks<1000){
         CPSspan.setAttribute('style', 'display:inline-block;');
         CPSPSspan.setAttribute('style', 'display:inline-block;');
+        CPSPSspan.classList.add("anim");
     }
     if (clicks>=1000){
         CPSspan.setAttribute('style', 'display:inline-block;');
         CPSPSspan.setAttribute('style', 'display:inline-block;');
         CPS3span.setAttribute('style', 'display:inline-block;');
+        if (clicks<2000){
+            CPS3span.classList.add("anim");
+        }
         // make the hover less intrusive now 
         var el = document.querySelector('.firsthover_r');
         if (el.classList.contains("firsthover_r")) {
@@ -173,6 +178,12 @@ function updatevisable(){
             el[i].classList.remove("firsthover_s_r");
             el[i].classList.add("firsthover_s_b");
         }
+    }
+    if (clicks>=2000){
+        // Remove the appear anim
+        CPSspan.classList.remove("anim");
+        CPSPSspan.classList.remove("anim");
+        CPS3span.classList.remove("anim");
     }
 }
 
